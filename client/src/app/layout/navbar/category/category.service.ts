@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Category, CategoryName } from './category.model';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root',
@@ -140,6 +140,31 @@ export class CategoryService {
       activated: false,
     },
   ];
+
+  private changeCategory$ = new BehaviorSubject<Category>(
+    this.getCategoryByDefault()
+  );
+  changeCategoryObs = this.changeCategory$.asObservable();
+
+  changeCategory(category: Category): void {
+    this.changeCategory$.next(category);
+  }
+
+  getCategories(): Category[] {
+    return this.categories;
+  }
+
+  getCategoryByDefault() {
+    return this.categories[0];
+  }
+
+  getCategoryByTechnicalName(
+    technicalName: CategoryName
+  ): Category | undefined {
+    return this.categories.find(
+      (category) => category.technicalName === technicalName
+    );
+  }
 
   constructor() {}
 }
