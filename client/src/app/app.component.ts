@@ -1,14 +1,24 @@
-import { Component } from '@angular/core';
-import { CommonModule } from '@angular/common';
+import { Component, inject, OnInit } from '@angular/core';
+
 import { RouterOutlet } from '@angular/router';
+import { ButtonModule } from 'primeng/button';
+import {
+  FaIconLibrary,
+  FontAwesomeModule,
+} from '@fortawesome/angular-fontawesome';
+import { fontAwesomeIcons } from './shared/font-awesome-icons';
 
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, RouterOutlet],
+  imports: [RouterOutlet, ButtonModule, FontAwesomeModule],
   templateUrl: './app.component.html',
-  styleUrls: ['./app.component.scss']
+  styleUrls: ['./app.component.scss'],
 })
-export class AppComponent {
-  title = 'client';
+export class AppComponent implements OnInit {
+  faIconLibrary: FaIconLibrary = inject(FaIconLibrary);
+
+  ngOnInit(): void {
+    this.faIconLibrary.addIcons(...fontAwesomeIcons);
+  }
 }
