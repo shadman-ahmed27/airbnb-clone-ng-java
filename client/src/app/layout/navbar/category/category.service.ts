@@ -165,6 +165,4 @@ export class CategoryService {
       (category) => category.technicalName === technicalName
     );
   }
-
-  constructor() {}
 }
