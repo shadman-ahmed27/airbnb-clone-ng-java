@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, OnInit} from '@angular/core';
 import { CategoryService } from './category.service';
 import { Category } from './category.model';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
