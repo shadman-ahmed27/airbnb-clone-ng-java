@@ -7,6 +7,8 @@ import { CategoryComponent } from './category/category.component';
 import { AvatarComponent } from './avatar/avatar.component';
 import { DynamicDialogComponent } from 'primeng/dynamicdialog';
 import { MenuItem } from 'primeng/api';
+import { ToastService } from '../toast.service';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-navbar',
@@ -28,6 +30,8 @@ export class NavbarComponent implements OnInit {
   guests: string = 'Add guests';
   dates: string = 'Any week';
 
+  toastService: ToastService = inject(ToastService);
+
   // login() => this.authService.login();
   // logout() => this.authService.logout();
 
@@ -35,6 +39,10 @@ export class NavbarComponent implements OnInit {
 
   ngOnInit(): void {
     this.fetchMenu();
+    this.toastService.send({
+      severity: 'info',
+      summary: 'Welcome to your Airbnb App!',
+    });
   }
 
   private fetchMenu(): void {
